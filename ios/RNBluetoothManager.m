@@ -185,15 +185,16 @@ RCT_EXPORT_METHOD(connect:(NSString *)address
     NSLog(@"Trying to connect....%@",address);
     [self callStop];
     if(connected){
-        NSString *connectedAddress =connected.identifier.UUIDString;
-        if([address isEqualToString:connectedAddress]){
-            resolve(nil);
-            return;
-        }else{
-            [self.centralManager cancelPeripheralConnection:connected];
-            //Callbacks:
-            //entralManager:didDisconnectPeripheral:error:
-        }
+        [self.centralManager cancelPeripheralConnection:connected];
+        //NSString *connectedAddress =connected.identifier.UUIDString;
+        //if([address isEqualToString:connectedAddress]){
+        //    resolve(nil);
+        //    return;
+        //}else{
+        //    [self.centralManager cancelPeripheralConnection:connected];
+        //    //Callbacks:
+        //    //entralManager:didDisconnectPeripheral:error:
+        //}
     }
     CBPeripheral *peripheral = [self.foundDevices objectForKey:address];
     self.connectResolveBlock = resolve;
